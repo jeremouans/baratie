@@ -256,8 +256,8 @@ header::before {
   border-top: 2px solid var(--red);
   box-shadow: 0 -4px 24px rgba(232,32,12,0.3);
   backdrop-filter:blur(16px);
-  padding: 10px 14px 12px;
-  display:flex; flex-direction:column; gap:8px;
+  padding: 6px 12px 8px;
+  display:flex; flex-direction:column; gap:4px;
 }
 
 .order-chips {
@@ -290,7 +290,7 @@ header::before {
   font-family:'Bangers', cursive;
 }
 
-.bar-bottom { display:flex; align-items:center; gap:10px; }
+.bar-bottom { display:flex; align-items:center; gap:8px; }
 
 .total-area { flex:1; }
 .total-label { font-size:0.6rem; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
@@ -306,18 +306,18 @@ header::before {
   background: linear-gradient(135deg, #e8200c, #ff4d1c);
   color:#fff;
   border:none;
-  border-radius:12px;
-  padding:0 22px;
-  height:56px;
+  border-radius:10px;
+  padding:0 18px;
+  height:38px;
   font-family:'Bangers', cursive;
-  font-size:1.3rem;
+  font-size:1.05rem;
   letter-spacing:0.08em;
   cursor:pointer;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   line-height:1.1;
   box-shadow: 0 4px 16px rgba(232,32,12,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
   transition:transform 0.1s, box-shadow 0.1s;
-  min-width:130px;
+  min-width:110px;
   position:relative; overflow:hidden;
 }
 .send-btn::before {
@@ -327,7 +327,7 @@ header::before {
 }
 .send-btn:active { transform:scale(0.95); box-shadow:0 2px 8px rgba(232,32,12,0.3); }
 .send-btn:disabled { background:#2e2318; color:var(--muted); box-shadow:none; }
-.send-jp { font-size:0.6rem; letter-spacing:0.2em; opacity:0.75; font-family:'Noto Sans JP'; font-weight:300; }
+.send-jp { font-size:0.52rem; letter-spacing:0.2em; opacity:0.75; font-family:'Noto Sans JP'; font-weight:300; }
 
 /* ─── TOAST ─── */
 .toast {
@@ -534,38 +534,40 @@ header::before {
 
 
 /* ─── SLOTS ─── */
-.slots-zone { padding:0 0 6px; }
+.slots-zone { padding:0 0 3px; }
 .slots-label {
   font-size:.55rem; letter-spacing:.2em; color:var(--muted);
-  text-align:center; margin-bottom:6px;
+  text-align:center; margin-bottom:3px;
 }
 .slots-row {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+  display:flex; flex-direction:row; gap:5px;
 }
 .slot {
+  flex:1;
   background:rgba(255,255,255,.04);
   border:2px dashed rgba(255,255,255,.12);
   border-radius:10px;
-  aspect-ratio:1;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:2px; font-size:.65rem; color:var(--muted);
+  height:44px;
+  display:flex; flex-direction:row; align-items:center;
+  gap:6px; padding: 0 8px;
+  font-size:.65rem; color:var(--muted);
   transition:border-color .2s, background .2s;
-  min-height:52px;
+  overflow:hidden;
 }
 .slot.filled {
   border:2px solid var(--red);
-  background:rgba(232,32,12,.12);
+  background:rgba(232,32,12,.10);
 }
-.slot-emoji { font-size:1.4rem; line-height:1; }
-.slot-name { font-size:.48rem; color:var(--text); text-align:center; line-height:1.2; }
+.slot-emoji { font-size:1.4rem; line-height:1; flex-shrink:0; }
+.slot-name { font-size:.58rem; color:var(--text); line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; }
 
 /* ─── CLEAR BTN ─── */
 .clear-btn {
   background:rgba(255,255,255,.06);
   border:1px solid var(--border);
   color:var(--muted);
-  border-radius:10px;
-  padding:0 14px; height:52px;
+  border-radius:8px;
+  padding:0 10px; height:38px;
   font-family:'Bangers',cursive;
   font-size:.85rem; letter-spacing:.06em;
   cursor:pointer;
@@ -922,11 +924,12 @@ function updateSlots() {
     const slot = document.getElementById('slot' + i);
     if (flat[i]) {
       slot.className = 'slot filled';
-      slot.innerHTML = '<img src="' + flat[i].photo + '" style="width:36px;height:36px;object-fit:cover;border-radius:6px;">' +
-                       '<div class="slot-name">' + flat[i].name.length > 14 ? flat[i].name.substring(0,13)+'…' : flat[i].name + '</div>';
+      slot.innerHTML =
+        '<img src="' + flat[i].photo + '" style="width:36px;height:36px;object-fit:cover;border-radius:7px;flex-shrink:0">' +
+        '<div class="slot-name">' + flat[i].name + '</div>';
     } else {
       slot.className = 'slot empty';
-      slot.innerHTML = '';
+      slot.innerHTML = '<div style="width:100%;text-align:center;font-size:.5rem;color:rgba(255,255,255,.12)">vide</div>';
     }
   }
 
